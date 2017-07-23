@@ -1,0 +1,17 @@
+#!/bin/bash
+function docker-rmi() {
+	[ -z $(docker images -q) ] || docker rmi $(docker images -q)
+}
+
+function docker-stp() {
+	[ -z $(docker ps -aq) ] || docker stop $(docker ps -aq)
+}
+
+function docker-rm() {
+	[ -z $(docker ps -aq) ] || docker rm $(docker ps -aq)
+}
+
+alias docker-rmi=docker-rmi
+alias docker-stp=docker-stp
+alias docker-rm=docker-rm
+alias docker-clear="docker-stp && docker-rm && docker-rmi"

@@ -4,5 +4,7 @@ alias eb="subl -a $LYI_BASH"
 alias rb="source ~/.bashrc"
 alias k="killall node"
 
+alias sub="subl -a"
+
 
 
