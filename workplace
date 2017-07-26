@@ -2,6 +2,7 @@ cd $WORK_PLACE
 
 alias eb="subl -a $LYI_BASH"
 alias rb="source ~/.bashrc"
+alias rf="npm cache clear"
 alias k="killall node"
 
 alias sub="subl -a"

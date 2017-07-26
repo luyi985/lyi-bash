@@ -1,17 +1,11 @@
-export site="car"
-export appKey="car-site"
+export site="multi"
+export appKey="hb-site"
 
 export currentSite="${site}-site"
-export currentSiteSrc="~/git/${currentSite}/src"
-export currentSiteAuto="~/git/${currentSite}/automation"
+export currentSiteSrc="$HOME/git/${currentSite}/src"
+export currentSiteAuto="$HOME/git/${currentSite}/automation"
 
-export foodSiteSrc="~/git/${currentSite}"
-
-alias rb="source ~/.bashrc"
-alias rf="npm cache clean"
-alias sub="subl -a ."
-alias eb="subl ~/bxm-script"
-alias k="killall node"
+export foodSiteSrc="$HOME/git/${currentSite}"
 
 alias run="cd ${currentSiteSrc} && rf && APP_KEY=${appKey} APP_ENV=production APP_DEBUG=true npm run dev"
 alias run-auto="cd ${currentSiteSrc} && rf && APP_KEY=${appKey} APP_ENV=sit APP_DEBUG=true APP_STUBBED=true npm run dev"
