@@ -5,7 +5,7 @@ alias rb="source ~/.bashrc"
 alias rf="npm cache clear"
 alias k="killall node"
 
-alias sub="subl -a"
+alias sub="subl -a ."
 
 
 
