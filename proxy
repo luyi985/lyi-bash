@@ -1,6 +1,6 @@
 
 function setProxy() {
-	MY_PROXY="http://Lyi:zxcASDqwe12345@sydproxy.acp.net:8080"
+	MY_PROXY="http://Lyi:zxcASDqwe123456@sydproxy.acp.net:8080"
 	export http_proxy="${MY_PROXY}"
 	export https_proxy="${MY_PROXY}"
 	export HTTP_PROXY="${MY_PROXY}"
@@ -11,7 +11,7 @@ function setProxy() {
 }
 
 function unsetProxy() {
-	MY_PROXY="http://Lyi:zxcASDqwe12345@sydproxy.acp.net:8080"
+	MY_PROXY="http://Lyi:zxcASDqwe123456@sydproxy.acp.net:8080"
 	unset http_proxy
 	unset https_proxy
 	unset HTTP_PROXY
