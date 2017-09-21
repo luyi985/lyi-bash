@@ -1,3 +1,4 @@
+nvm use 8.4.0
 export WORK_PLACE="$HOME/git/lyi"
 echo "WORK_PLACE: $WORK_PLACE"
 
@@ -9,3 +10,4 @@ source "$LYI_BASH/func"
 source "$LYI_BASH/workplace"
 source "$LYI_BASH/docker"
 source "$LYI_BASH/bxm-script"
+source "$LYI_BASH/digital-ocean"
