@@ -14,5 +14,5 @@ function docker-rm() {
 alias docker-rmi=docker-rmi
 alias docker-stp=docker-stp
 alias docker-rm=docker-rm
-alias docker-clean="docker rmi $(docker images --filter 'dangling=true' -q)"
+alias docker-clean="docker rmi -f $(docker images -f 'dangling=true' -q)"
 alias docker-clear="docker-stp && docker-rm && docker-rmi"
