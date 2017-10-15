@@ -1,11 +1,12 @@
 cd $WORK_PLACE
 
+function rb() {
+	[ -f ~/.bashrc ] && source ~/.bashrc
+	[ -f ~/.bash_profile ] && source ~/.bash_profile
+}
+
 alias eb="subl -a $LYI_BASH"
-alias rb="source ~/.bashrc"
+alias rb=rb
 alias rf="npm cache clear"
 alias k="killall node"
-
 alias sub="subl -a ."
-
-
-
