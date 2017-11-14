@@ -23,3 +23,4 @@ function unsetProxy() {
 
 alias proxyOn=setProxy
 alias proxyOff=unsetProxy
+alias proxyMod="sub ~/.bashrc /etc/wgetrc /etc/apt/apt.conf /etc/default/docker"
