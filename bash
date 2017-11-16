@@ -1,4 +1,4 @@
-nvm use 8.7.0
+nvm use 8.9.0
 export WORK_PLACE="$HOME/git/lyi"
 echo "WORK_PLACE: $WORK_PLACE"
 
