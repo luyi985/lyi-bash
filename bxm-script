@@ -1,5 +1,5 @@
-export site="car"
-export appKey="car-site"
+export site="now"
+export appKey="now-site"
 
 export currentSite="${site}-site"
 export currentSiteSrc="$HOME/git/${currentSite}/src"
@@ -7,7 +7,7 @@ export currentSiteAuto="$HOME/git/${currentSite}/automation"
 
 export foodSiteSrc="$HOME/git/${currentSite}"
 
-alias run="cd ${currentSiteSrc} && rf && APP_KEY=${appKey} APP_ENV=production npm run dev"
+alias run="cd ${currentSiteSrc} && APP_KEY=${appKey} APP_ENV=production npm run dev"
 alias run-auto="cd ${currentSiteSrc} && rf && APP_KEY=${appKey} APP_ENV=sit APP_DEBUG=true APP_STUBBED=true npm run dev"
 alias auto="export URL=http://localhost:3001/ && export HTTP_PROXY='' && export HTTPS_PROXY=${MY_PROXY} && export APP_KEY=${appKey}&& cd ${currentSiteAuto} && rf && npm run watch"
 alias autop="export URL=http://localhost:3001/ && export HTTP_PROXY='' && export HTTPS_PROXY=${MY_PROXY} && export APP_KEY=${appKey}&& cd ${currentSiteAuto} && rf && npm run watch:phantom"
@@ -17,9 +17,9 @@ export articleSrc="~/git/wn-article/lib"
 export articleDes="${currentSiteSrc}/node_modules/@bxm/article/"
 alias article="rm -rf ${articleDes}/lib && mv ${articleSrc} ${articleDes}"  
 
-export serverSrc="~/git/wn-server/lib"
+export serverSrc="~/git/wn-server"
 export serverDes="${currentSiteSrc}/node_modules/@bxm/server/"
-alias server="rm -rf ${serverDes}/lib && mv ${serverSrc} ${serverDes}"
+alias server="rm -rf ${serverDes}/lib ${serverDes}/amp && mv ${serverSrc}/lib ${serverDes} && cp -rf ${serverSrc}/amp ${serverDes}/amp"
 
 export gallerySrc="~/git/wn-gallery/lib"
 export galleryDes="${currentSiteSrc}/node_modules/@bxm/gallery/"
