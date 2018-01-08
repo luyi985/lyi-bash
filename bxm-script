@@ -1,5 +1,5 @@
-export site="now"
-export appKey="now-site"
+export site="homes"
+export appKey="homes-site"
 
 export currentSite="${site}-site"
 export currentSiteSrc="$HOME/git/${currentSite}/src"
@@ -7,10 +7,10 @@ export currentSiteAuto="$HOME/git/${currentSite}/automation"
 
 export foodSiteSrc="$HOME/git/${currentSite}"
 
-alias run="cd ${currentSiteSrc} && APP_KEY=${appKey} APP_ENV=production npm run dev"
-alias run-auto="cd ${currentSiteSrc} && rf && APP_KEY=${appKey} APP_ENV=sit APP_DEBUG=true APP_STUBBED=true npm run dev"
-alias auto="export URL=http://localhost:3001/ && export HTTP_PROXY='' && export HTTPS_PROXY=${MY_PROXY} && export APP_KEY=${appKey}&& cd ${currentSiteAuto} && rf && npm run watch"
-alias autop="export URL=http://localhost:3001/ && export HTTP_PROXY='' && export HTTPS_PROXY=${MY_PROXY} && export APP_KEY=${appKey}&& cd ${currentSiteAuto} && rf && npm run watch:phantom"
+alias run="cd ${currentSiteSrc} && APP_KEY=${appKey} && APP_REGION=au && APP_ENV=dev && APP_DEBUG=true && npm run dev"
+alias run-auto="cd ${currentSiteSrc} && APP_KEY=${appKey} && APP_ENV=sit && APP_DEBUG=true && APP_STUBBED=true && npm run dev"
+alias auto="export URL=http://localhost:3001/ && export HTTP_PROXY='' && export HTTPS_PROXY=${MY_PROXY} && export APP_KEY=${appKey} && cd ${currentSiteAuto} && rf && npm run watch"
+alias autop="export URL=http://localhost:3001/ && export HTTP_PROXY='' && export HTTPS_PROXY=${MY_PROXY} && export APP_KEY=${appKey}&& cd ${currentSiteAuto} && npm run watch:phantom"
 
 
 export articleSrc="~/git/wn-article/lib"
@@ -29,9 +29,9 @@ export uiSrc="~/git/wn-ui/lib"
 export uiDes="${currentSiteSrc}/node_modules/@bxm/ui/"
 alias ui="rm -rf ${uiDes}/lib && mv ${uiSrc} ${uiDes}"  
 
-export adSrc="~/git/wn-adverts/lib"
+export adSrc="~/git/wn-adverts/"
 export adDes="${currentSiteSrc}/node_modules/@bxm/ad/"
-alias ad="rm -rf ${adDes}/lib && mv ${adSrc} ${adDes}"
+alias ad="rm -rf ${adDes}/lib && mv ${adSrc}lib ${adDes} && rm -rf ${adDes}/styles && cp -rf ${adSrc}styles ${adDes}styles"
 
 export siteHeaderSrc="~/git/wn-site-header/lib"
 export siteHeaderDes="${currentSiteSrc}/node_modules/@bxm/site-header/"
