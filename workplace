@@ -11,10 +11,10 @@ function loadPython() {
 	[ -f ~/git/python-learn/python.sh ] && source ~/git/python-learn/python.sh
 }
 
-alias eb="subl -a $LYI_BASH"
+alias eb="code -a $LYI_BASH"
 alias rb=rb
 alias rf="npm cache clear"
 alias k="killall node"
-alias sub="subl -a ."
+alias sub="code -a ."
 alias pyOn=loadPython
 
