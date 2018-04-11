@@ -1,4 +1,12 @@
 nvm use 8.9.0
+
+export red='\033[0;31m'
+export green='\033[00;32m'
+export yellow='\033[00;33m'
+export blue='\033[00;34m'
+export back='\e[0m'
+
+
 export WORK_PLACE="$HOME/git/lyi"
 echo "WORK_PLACE: $WORK_PLACE"
 
