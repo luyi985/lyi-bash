@@ -1,18 +1,46 @@
-export red='\033[0;31m'
-export green='\033[00;32m'
-siteSrcArr=("$(pwd)/aa" "$(pwd)/bb" "$(pwd)/cc")
 
-function packageInstaller() {
-    [ -d $2 ] && cd $2 && echo -e "${green}Installing package $1 ($(pwd))${back}" && npm install $1
-    [ -d $2 ] || (echo -e "${red}Fail to install package $1,not found ($2)${back}" && exit 1)
+strContains() {
+    if [[ $1 == *$2* ]] 
+    then 
+        return 0 
+    else 
+        return 1
+    fi
 }
-alias install=packageInstaller
 
+colorEcho(){
+    local currentColor=''
+    # Reset
+    local colorOff='\033[0m'       # Text Reset
+    case "$1" in
+    black)
+        currentColor='\033[0;30m'        # Black
+        ;;
+    red)
+        currentColor='\033[0;31m'          # Red
+        ;;
+    green)
+        currentColor='\033[0;32m'        # Green
+        ;;
+    yellow)
+        currentColor='\033[0;33m'       # Yellow
+        ;;
+    blue)
+        currentColor='\033[0;34m'         # Blue
+        ;;
+    purple)
+        currentColor='\033[0;35m'       # Purple
+        ;;
+    cyan)
+        currentColor='\033[0;36m'         # Cyan
+        ;;
+    white)
+        currentColor='\033[0;37m'        # White
+        ;;
+    *)
+        currentColor='\033[0;37m'        # White
+        ;;
+    esac
 
-function packageInstallInBatch(){
-    for src in "${siteSrcArr[@]}"
-    do
-        install $1 $src
-    done
+    echo -e "${currentColor}$2${colorOff}"
 }
-alias ib=packageInstallInBatch
