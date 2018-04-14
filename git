@@ -1,0 +1,88 @@
+
+setpReset(){
+    export steps=("gitInitCheck" "gitCodeCleanCheck" "gitCodeUpdate" "gitCodeRebase")
+}
+
+
+
+clear() {
+    unset currentBranc
+}
+
+function temp(){
+    cd /Users/yilu/git/lyi/test/playground
+}
+
+function localRebase(){
+    git checkout $1 || (git branch --set-upstream-to=origin/$1 $1 && git checkout -b $1)
+    checkBranch $1 && git rebase master && echo "$(pwd) success" && return 0
+    checkBranch $1 && echo "Rebase fail"
+}
+
+function updateFromRemote(){
+    echo "--------Update From Remote--------"
+    git pull && ((echo "pull success -------" && exit 1) || echo 'success callback --------')
+    git pull || (echo "pull fail -------" && return 1)
+}
+
+function branchClean(){
+    echo "--------branchClean--------"
+    checkBranch "master" && git reset --hard && git clean -f && return 0
+    checkBranch "master" || (git add --all && git commit -m "temp save")
+    git checkout master
+}
+
+function checkBranch(){
+    echo "--------check if is on ${1}--------"
+    strContains "$(git status | head -n1)" "${1}"
+    [[ $? -eq 0 ]] && echo "It is branch $1"
+}
+
+function isGit(){
+    echo "--------check if git init--------"
+    [[ $(ls -l | wc -l) -eq 0 ]] && touch readme.md && echo "Create readme.md"
+    git status || (git init && git add --all && git commit -m 'init commit' && echo "init commit")
+}
+
+function singleRepoProcess(){
+    isGit && branchClean && updateFromRemote $1 && updateFromRemote $1
+}
+
+temp
+
+alias sp=singleRepoProcess
+
+t1(){
+    echo "process t1()"
+    if [ $1 -gt 10 ]
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
+t2(){
+    t1 $1 && (echo "Greater than 10-----" && return 0) && return 0
+    t1 $1 || (echo "Less than 10-----" && return 0) && return 1
+}
+
+t3(){
+    t1 $1
+    [ $? ] || echo "fail"
+    [ $? ] && echo "success"
+}
+t4(){
+    echo ${a:-"abc"}
+    a="xxxxxx"
+    echo ${a:-"abc"}
+}
+
+t5(){
+    if [[ $1 == "abcde" ]]
+    then 
+        echo "Greater than 10"
+    else
+        echo "Less than 10"
+    fi
+}

@@ -40,16 +40,10 @@ alias header="rm -rf ${siteHeaderDes}/lib && mv ${siteHeaderSrc} ${siteHeaderDes
 
 
 # -----------Install packages------------
-
 siteSrcArr=("$HOME/git/now-site/src" "$HOME/git/homes-site/src" "$HOME/git/multi-site/src")
 function packageInstaller() {
-<<<<<<< HEAD
     [ -d $2 ] && cd $2 && colorEcho green "Installing package $1 ($(pwd))" && npm install --save $1
     [ -d $2 ] || (colorEcho red "Fail to install package $1,not found ($2)" && exit 1)
-=======
-    [ -d $2 ] && cd $2 && echo -e "${green}Installing package $1 ($(pwd))${back}" && npm install --save $1
-    [ -d $2 ] || (echo -e "${red}Fail to install package $1,not found ($2)${back}" && exit 1)
->>>>>>> update site src
 }
 alias install=packageInstaller
 
@@ -59,8 +53,4 @@ function packageInstallInBatch(){
         install $1 $src
     done
 }
-<<<<<<< HEAD
 alias ib=packageInstallInBatch
-=======
-alias ib=packageInstallInBatch
->>>>>>> update site src
