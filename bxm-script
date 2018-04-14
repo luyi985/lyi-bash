@@ -40,7 +40,6 @@ alias header="rm -rf ${siteHeaderDes}/lib && mv ${siteHeaderSrc} ${siteHeaderDes
 
 
 # -----------Install packages------------
-
 siteSrcArr=("$HOME/git/now-site/src" "$HOME/git/homes-site/src" "$HOME/git/multi-site/src")
 function packageInstaller() {
     [ -d $2 ] && cd $2 && colorEcho green "Installing package $1 ($(pwd))" && npm install --save $1
