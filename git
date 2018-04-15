@@ -3,6 +3,10 @@ cd /Users/yilu/git/lyi/test/playground
 
 hasBranch() {
     local branch=$(git branch | grep "^  ${1}$")
+    [ -z $branch ] && {
+        branch=$(git branch | grep "^* ${1}$")
+    }
+
     branch=${branch#"*"}
     branch=${branch#" "}
     branch=${branch#" "}
