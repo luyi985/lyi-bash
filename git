@@ -87,13 +87,15 @@ getLatestCode(){
     git pull --quiet
     infoOutput "* Git pull, get latest update"
 
-    hasBranch "${1}" && {
+    hasBranch "${1}"
+    [[ $? -eq 0 ]] && {
         git checkout "${1}"
         infoOutput "* Switch to branch ${1}"
     }
 
-    hasBranch "${1}" || {
+    [[ $? -eq 0 ]] || {
         git checkout -b "${1}"
+        infoOutput "* Create new branch ${1}"
         infoOutput "* Switch to branch ${1}"
     }
     
@@ -103,8 +105,9 @@ getLatestCode(){
     }
 
     [[ $? -eq 0 ]] || {
-        alert "Fail: ${1} rebase fail, manual process required"
+        alert "* Fail: ${1} rebase fail, manual process required"
         git rebase --abort
+        alert "* Git rebase --abort"
     }
 }
 
