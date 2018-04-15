@@ -50,10 +50,10 @@ isClean(){
 isGit(){
     echo "---------Check git folder-------------"
     git status > /dev/null
-    [[ $? -eq 0 ]] || { alert "Fail: $(pwd) is not a valid git repo"; return 1; }
+    [[ $? -eq 0 ]] || { errorAlert "Fail: $(pwd) is not a valid git repo"; return 1; }
 
     hasBranch master
-    [[ $? -eq 0 ]] || { alert "Fail: $(pwd) has no master branch found"; return 1; }
+    [[ $? -eq 0 ]] || { errorAlert "Fail: $(pwd) has no master branch found"; return 1; }
 
     infoOutput "* $(pwd) is a valid git repo"
     return 0
@@ -105,9 +105,9 @@ getLatestCode(){
     }
 
     [[ $? -eq 0 ]] || {
-        alert "* Fail: ${1} rebase fail, manual process required"
+        errorAlert "* Fail: ${1} rebase fail, manual process required"
         git rebase --abort
-        alert "* Git rebase --abort"
+        errorAlert "* Git rebase --abort"
     }
 }
 

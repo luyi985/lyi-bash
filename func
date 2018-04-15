@@ -47,7 +47,7 @@ colorEcho(){
     echo -e "${currentColor}$2${colorOff}"
 }
 
-alert() {
+errorAlert() {
     colorEcho red "$1"
 }
 

@@ -57,8 +57,8 @@ function packageInstallInBatch(){
 alias ib=packageInstallInBatch
 
 # -----------Git update code------------
-#siteArr=("$HOME/git/now-site/" "$HOME/git/homes-site/" "$HOME/git/multi-site/")
-siteArr=("/Users/yilu/git/lyi/test/aa/playground")
+siteArr=("$HOME/git/now-site/" "$HOME/git/homes-site/" "$HOME/git/multi-site/")
+#siteArr=("/Users/yilu/git/lyi/test/aa/playground")
 gitUpdateInBatch(){
     gitInput
     for site in "${siteArr[@]}"
@@ -68,3 +68,5 @@ gitUpdateInBatch(){
         sp $newBranchName
     done
 }
+
+alias gpull=gitUpdateInBatch
