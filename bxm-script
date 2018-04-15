@@ -55,3 +55,16 @@ function packageInstallInBatch(){
     done
 }
 alias ib=packageInstallInBatch
+
+# -----------Git update code------------
+#siteArr=("$HOME/git/now-site/" "$HOME/git/homes-site/" "$HOME/git/multi-site/")
+siteArr=("/Users/yilu/git/lyi/test/aa/playground")
+gitUpdateInBatch(){
+    gitInput
+    for site in "${siteArr[@]}"
+    do
+        cd $site
+        colorEcho cyan "Now we are in $(pwd)"
+        sp $newBranchName
+    done
+}
