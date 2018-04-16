@@ -2,8 +2,10 @@
 strContains() {
     if [[ $1 == *$2* ]] 
     then 
+        echo "find"
         return 0 
     else 
+        echo "not find"
         return 1
     fi
 }
@@ -43,4 +45,20 @@ colorEcho(){
     esac
 
     echo -e "${currentColor}$2${colorOff}"
+}
+
+errorAlert() {
+    colorEcho red "$1"
+}
+
+success() {
+    colorEcho green "$1"
+}
+
+warning() {
+    colorEcho yellow "$1"
+}
+
+infoOutput() {
+    colorEcho cyan "$1"
 }
