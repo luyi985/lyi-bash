@@ -1,0 +1,55 @@
+infoOutput "bash setting"
+updateConfig() {
+    echo ""
+}
+addWorkplace() {
+    infoOutput "Please input the new path"
+    read newOpPath
+    [ -z "$SITE_ARR" ] && {
+        echo "export SITE_ARR=($(printf "\"%s\" " "${newOpPath}"))" > $LYI_BASH/config/workplace_config
+        source "$LYI_BASH/config/config"
+        success "${SITE_ARR[*]}";
+    }
+    [ -z "$SITE_ARR" ] || {
+        SITE_ARR+=(${newOpPath})
+        echo "export SITE_ARR=($(printf "\"%s\" " ${SITE_ARR[*]}))" > $LYI_BASH/config/workplace_config
+        source "$LYI_BASH/config/config"
+        success "${SITE_ARR[*]}";
+    }
+}
+
+removeWorkplace() {
+    echo ""
+}
+
+setOptions() {
+    infoOutput "You can select following setting options"
+    infoOutput "Select by typing a number before option"
+    local options=("[0] Add a workplace path" "[1] Remove a workpace path" "[2] exit")
+    
+    for op in "${options[@]}"
+    do
+        infoOutput "$op"
+    done
+
+    read currentOptions
+
+    case "${currentOptions}" in
+        0)
+            success "You selected ${options[0]}" && addWorkplace
+        ;;
+        1)
+            success "You selected ${options[1]}" && removeWorkplace
+        ;;
+        2)
+            success "You selected ${options[2]}"
+            return 1
+        ;;
+        *)
+            warning "Option not supportted, please select again"
+            setOptions
+        ;;
+    esac
+}
+
+alias so=setOptions
