@@ -1,5 +1,3 @@
-[[ -z $WORK_PLACE ]] && cd $WORK_PLACE
-
 UPDATE_BASH(){
     [[ -f "${HOME}/.bashrc" ]] && source "${HOME}/.bashrc"
     [[ -f "${HOME}/.bash_profile" ]] && source "${HOME}/.bash_profile"
