@@ -1,8 +1,10 @@
-cd $WORK_PLACE
+[[ -z $WORK_PLACE ]] && cd $WORK_PLACE
 
-function rb() {
-	[ -f ~/.bashrc ] && source ~/.bashrc
-	[ -f ~/.bash_profile ] && source ~/.bash_profile
+UPDATE_BASH(){
+    [[ -f "${HOME}/.bashrc" ]] && source "${HOME}/.bashrc"
+    [[ -f "${HOME}/.bash_profile" ]] && source "${HOME}/.bash_profile"
+    ret_code=$?
+	echo $ret_code
 }
 
 function loadPython() {
@@ -12,9 +14,8 @@ function loadPython() {
 }
 
 alias eb="code -a $LYI_BASH"
-alias rb=rb
+alias rb=UPDATE_BASH
 alias rf="npm cache clear"
 alias k="killall node"
 alias sub="code -a ."
 alias pyOn=loadPython
-
