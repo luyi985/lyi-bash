@@ -40,33 +40,41 @@ alias header="rm -rf ${siteHeaderDes}/lib && mv ${siteHeaderSrc} ${siteHeaderDes
 
 
 # -----------Install packages------------
-
-siteSrcArr=("$HOME/git/now-site/src" "$HOME/git/homes-site/src" "$HOME/git/multi-site/src")
-function packageInstaller() {
+packageInstaller() {
+    infoOutput "install ${2} at ${1}"
     [ -d $2 ] && cd $2 && colorEcho green "Installing package $1 ($(pwd))" && npm install --save $1
     [ -d $2 ] || (colorEcho red "Fail to install package $1,not found ($2)" && exit 1)
 }
-alias install=packageInstaller
 
-function packageInstallInBatch(){
-    for src in "${siteSrcArr[@]}"
-    do
-        install $1 $src
-    done
+packageInstallInBatch(){
+    [[ -z ${SITE_ARR} ]] && {
+        errorAlert "SITE_ARR is null";
+        addProjectFolders;
+    }
+    [[ -z ${SITE_ARR} ]] || {
+        for site in "${SITE_ARR[@]}"
+        do
+            packageInstaller $1 "${site}/gallerySrc"
+        done
+    }
 }
-alias ib=packageInstallInBatch
 
 # -----------Git update code------------
-siteArr=("$HOME/git/now-site/" "$HOME/git/homes-site/" "$HOME/git/multi-site/")
-#siteArr=("/Users/yilu/git/lyi/test/aa/playground")
 gitUpdateInBatch(){
+    [[ -z ${SITE_ARR} ]] && {
+        errorAlert "SITE_ARR is null";
+        addProjectFolders
+    }
     gitInput
-    for site in "${siteArr[@]}"
-    do
-        cd $site
-        colorEcho cyan "Now we are in $(pwd)"
-        sp $newBranchName
-    done
+    [[ -z ${SITE_ARR} ]] || {
+        for site in "${SITE_ARR[@]}"
+        do
+            cd $site
+            colorEcho purple "Now we are in $(pwd)"
+            sp $newBranchName
+        done
+    }
 }
 
+alias ib=packageInstallInBatch
 alias gpull=gitUpdateInBatch

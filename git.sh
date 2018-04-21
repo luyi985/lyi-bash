@@ -1,6 +1,3 @@
-#cd /Users/yilu/git/lyi/test/aa
-#cd /Users/yilu/git/lyi/test/playground
-
 hasBranch() {
     local branch=$(git branch | grep "^  ${1}$")
     [ -z $branch ] && {
