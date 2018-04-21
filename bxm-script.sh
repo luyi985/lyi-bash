@@ -41,6 +41,7 @@ alias header="rm -rf ${siteHeaderDes}/lib && mv ${siteHeaderSrc} ${siteHeaderDes
 
 # -----------Install packages------------
 packageInstaller() {
+    infoOutput "install ${2} at ${1}"
     [ -d $2 ] && cd $2 && colorEcho green "Installing package $1 ($(pwd))" && npm install --save $1
     [ -d $2 ] || (colorEcho red "Fail to install package $1,not found ($2)" && exit 1)
 }
@@ -53,7 +54,7 @@ packageInstallInBatch(){
     [[ -z ${SITE_ARR} ]] || {
         for site in "${SITE_ARR[@]}"
         do
-            install $1 "${site}/src"
+            packageInstaller $1 "${site}/gallerySrc"
         done
     }
 }
@@ -75,5 +76,5 @@ gitUpdateInBatch(){
     }
 }
 
-alias ib=packageInstallInBatc
+alias ib=packageInstallInBatch
 alias gpull=gitUpdateInBatch
