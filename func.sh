@@ -68,3 +68,29 @@ lyiEditor() {
         subl -a $1 || code -a $1 || gedit $1 || nano $1
     }
 }
+
+GET_BASH_PATH() {
+    unset LYI_BASH_PATH
+
+    [[ -f "${HOME}/.bashrc" ]] && {
+        export LYI_BASH_PATH="${HOME}/.bashrc"
+        return 0
+    }
+
+    [[ -f "${HOME}/.bash_profile" ]] && {
+        export LYI_BASH_PATH="${HOME}/.bash_profile"
+        return 0
+    }
+
+    errorAlert "Fail: can not find .bashrc/.bash_profile in ${HOME}"
+    return 1
+}
+
+UPDATE_BASH(){
+    [[ -f "${HOME}/.bashrc" ]] && source "${HOME}/.bashrc"
+    [[ -f "${HOME}/.bash_profile" ]] && source "${HOME}/.bash_profile"
+    ret_code=$?
+    echo $ret_code
+    return $ret_code
+}
+alias rb=UPDATE_BASH

@@ -5,24 +5,6 @@ set -e
 source "./func.sh"
 source "./bash-setting.sh"
 
-GET_BASH_PATH() {
-    unset LYI_BASH_PATH
-
-    [[ -f "${HOME}/.bashrc" ]] && {
-        export LYI_BASH_PATH="${HOME}/.bashrc"
-        return 0
-    }
-
-    [[ -f "${HOME}/.bash_profile" ]] && {
-        export LYI_BASH_PATH="${HOME}/.bash_profile"
-        return 0
-    }
-
-    errorAlert "Fail: can not find .bashrc/.bash_profile in ${HOME}"
-    return 1
-}
-
-
 SET_ROOT() {
     local status
     [[ -z $LYI_BASH ]] && {
