@@ -15,12 +15,12 @@ setWorkPlace(){
     [[ -d "${WORK_PLACE}" ]] && {
         echo "export WORK_PLACE=\"${WORK_PLACE}\"" > $LYI_BASH/config/workplace.config
         [[ $? -eq 0 ]] && {
-            config=$(updateConfig)
-            [[ $config -eq 0 ]] && {
-                success "GOOD";
-            }
+            export WORK_PLACE && success "Set workplace path ${WORK_PLACE}"       
+        }
 
-            [[ $config -eq 0 ]] || setWorkPlace
+        [[ $? -eq 0 ]] || {
+            errorAlert "Fail to set workplace"
+            setWorkPlace
         }
     }
 }
@@ -44,9 +44,12 @@ addProjectFolders() {
         done
         echo "export SITE_ARR=( $(echo ${selectedFolder[@]}) )" > "${LYI_BASH}/config/project.config"
         [[ $? -eq 0 ]] && {
-            updateConfig
-            [[ $? -eq 0 ]] && success "GOOD"
-            [[ $? -eq 0 ]] || addProjectFolders
+            export SITE_ARR=( $(echo ${selectedFolder[@]}) ) && success "Set SITE_ARR ${SITE_ARR[*]}" 
+        }
+
+        [[ $? -eq 0 ]] || {
+            errorAlert "Fail to set workplace"
+            addProjectFolders
         }
     }
 }
@@ -65,8 +68,7 @@ setOptions() {
     case "${currentOptions}" in
         0)
             success "You selected ${options[0]}"
-            setWorkPlace
-            status=$?
+            setWorkPlace && addProjectFolders
         ;;
         1)
             success "You selected ${options[1]}"

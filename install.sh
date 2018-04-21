@@ -1,41 +1,64 @@
 #!/bin/bash
 set -e
 #set -x
-SET_ROOT() {
-    local status
-    [[ -f "${HOME}/.bashrc" && -z $LYI_BASH ]] && {
-        echo '' >> ${HOME}/.bashrc
-        echo "export LYI_BASH=\"$(pwd)\"" >> ${HOME}/.bashrc
-        echo "source \"$(pwd)/bash.sh\"" >> ${HOME}/.bashrc
-        status=$?
+
+source "./func.sh"
+source "./bash-setting.sh"
+
+GET_BASH_PATH() {
+    unset LYI_BASH_PATH
+
+    [[ -f "${HOME}/.bashrc" ]] && {
+        export LYI_BASH_PATH="${HOME}/.bashrc"
+        return 0
     }
 
-    [[ -f "${HOME}/.bash_profile" && -z $LYI_BASH ]] && {
-        echo '' >> ${HOME}/.bash_profile
-        echo "export LYI_BASH=\"$(pwd)\"" >> ${HOME}/.bash_profile
-        echo "source \"$(pwd)/bash.sh\"" >> ${HOME}/.bash_profile
-        status=$?
+    [[ -f "${HOME}/.bash_profile" ]] && {
+        export LYI_BASH_PATH="${HOME}/.bash_profile"
+        return 0
     }
 
-    [[ status -eq 0 ]] && echo "Bash updated"
-    [[ status -eq 0 ]] || echo "Bash update fail"
-    exit $status
+    errorAlert "Fail: can not find .bashrc/.bash_profile in ${HOME}"
+    return 1
 }
 
 
-[[ -z $LYI_BASH ]] && {
-    SET_ROOT ]
-    export exitCode=$?
+SET_ROOT() {
+    local status
+    [[ -z $LYI_BASH ]] && {
+        echo '' >> ${HOME}/.bashrc
+        echo "export LYI_BASH=\"$(pwd)\"" >> $1
+        echo "source \"$(pwd)/bash.sh\"" >> $1
+        status=$?
+    }
+
+    [[ status -eq 0 ]] && {
+        export LYI_BASH=$(pwd); 
+        success "Bash updated";
+    }
+
+    [[ status -eq 0 ]] || errorAlert "Bash update fail"
+    return $status
+}
+
+
+GET_BASH_PATH
+ifHasBash=$?
+
+[[ -z $LYI_BASH || -d $LYI_BASH ]] && {
+    [[ $ifHasBash -eq 0 && -n $LYI_BASH_PATH ]] && {
+        SET_ROOT "${LYI_BASH_PATH}"
+        exitCode=$?
+        [[ $exitCode -eq 0 ]] && setOptions
+        [[ $exitCode -eq 0 ]] || {
+            errorAlert "Write LYI_BASH fail"
+            infoOutput "Please manually append following scipt to ${LYI_BASH_PATH}"
+            infoOutput "export LYI_BASH=\"$(pwd)\" source \"$(pwd)/bash.sh\""
+            lyiEditor "${LYI_BASH_PATH}"
+        }
+    }
 }
 
 [[ -d $LYI_BASH ]] && {
-    echo "LYI BASH has been installed, no need to relocat";
-    export exitCode=0;
+    warning "LYI BASH has been installed";
 }
-
-[[ -d $LYI_BASH ]] || {
-    SET_ROOT;
-    export exitCode=$?;
-}
-
-exit $exitCode
