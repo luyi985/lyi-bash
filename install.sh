@@ -36,7 +36,7 @@ ifHasBash=$?
             errorAlert "Write LYI_BASH fail"
             infoOutput "Please manually append following scipt to ${LYI_BASH_PATH}"
             infoOutput "export LYI_BASH=\"$(pwd)\" source \"$(pwd)/bash.sh\""
-            lyed "${LYI_BASH_PATH}"
+            lyiEdit "${LYI_BASH_PATH}"
         }
     }
 }

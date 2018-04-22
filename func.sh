@@ -63,7 +63,7 @@ infoOutput() {
     colorEcho cyan "$1"
 }
 
-lyed() {
+lyiEdit() {
     [[ -f "${1}" || -d "${1}" ]] && {
         subl -a $1 || code -a $1 || gedit $1 || nano $1
     }

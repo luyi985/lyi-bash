@@ -54,7 +54,7 @@ packageInstallInBatch(){
     [[ -z ${SITE_ARR} ]] || {
         for site in "${SITE_ARR[@]}"
         do
-            packageInstaller $1 "${site}/gallerySrc"
+            packageInstaller $1 "${site}/src"
         done
     }
 }
