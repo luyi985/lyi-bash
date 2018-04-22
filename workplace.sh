@@ -10,6 +10,7 @@ editBash() {
 	[[ $1 == 'h' ]] && cd $LYI_BASH
 }
 
+
 alias eb=editBash
 alias rf="npm cache clear"
 alias k="killall node"

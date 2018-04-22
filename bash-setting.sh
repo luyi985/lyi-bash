@@ -54,6 +54,17 @@ addProjectFolders() {
     }
 }
 
+fastGo() {
+    [[ -z $SITE_ARR ]] && exit 1
+    infoOutput "Please type the number before folder for fast travelling"
+    for siteId in ${!SITE_ARR[*]}; do
+        infoOutput "${siteId}: ${SITE_ARR[$siteId]}"
+    done;
+    read id
+    [[ -d "${SITE_ARR[${id}]}" ]] && cd ${SITE_ARR[${id}]}
+    [[ -d "${SITE_ARR[${id}]}" ]] || erroAlert "Can not find folder ${SITE_ARR[${id}]}"
+}
+
 setOptions() {
     infoOutput "You can select following setting options"
     infoOutput "Select by typing a number before option"
