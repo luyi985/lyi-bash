@@ -7,6 +7,7 @@ loadPython() {
 editBash() {
 	[[ -f "${HOME}/.bashrc" ]] && lyiEdit "${HOME}/.bashrc"
 	[[ -f "${HOME}/.bash_profile" ]] && lyiEdit "${HOME}/.bash_profile"
+	[[ -d "${LYI_BASH}" ]] && lyiEdit "${LYI_BASH}"
 	[[ $1 == 'h' ]] && cd $LYI_BASH
 }
 
