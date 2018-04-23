@@ -67,7 +67,9 @@ gitUpdateInBatch(){
     }
     gitInput
     [[ -z ${SITE_ARR} ]] || {
-        for site in "${SITE_ARR[@]}"
+        local sites=( $(echo ${SITE_ARR}) )
+
+        for site in "${sites[@]}"
         do
             cd $site
             colorEcho purple "Now we are in $(pwd)"
