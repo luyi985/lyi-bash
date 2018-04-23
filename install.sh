@@ -39,4 +39,4 @@ INIT() {
 
 [[ -d $LYI_BASH ]] || INIT
 
-[[ -d $LYI_BASH ]] && { warning "LYI BASH has been installed" }
+[[ -d $LYI_BASH ]] && warning "LYI BASH has been installed"
