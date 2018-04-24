@@ -2,10 +2,10 @@ export site="now"
 export appKey="now-site"
 
 export currentSite="${site}-site"
-export currentSiteSrc="$HOME/git/${currentSite}/src"
-export currentSiteAuto="$HOME/git/${currentSite}/automation"
+export currentSiteSrc="$HOME/Desktop/site/${currentSite}/src"
+export currentSiteAuto="$HOME/Desktop/site/${currentSite}/automation"
 
-export foodSiteSrc="$HOME/git/${currentSite}"
+export foodSiteSrc="$HOME/Desktop/site/${currentSite}"
 
 alias run="cd ${currentSiteSrc} && APP_KEY=${appKey} APP_REGION=au APP_ENV=dev APP_DEBUG=true APP_STUBBED=false npm run dev"
 alias run-auto="cd ${currentSiteSrc} && APP_KEY=${appKey} APP_ENV=sit APP_DEBUG=true APP_STUBBED=true npm run dev"
