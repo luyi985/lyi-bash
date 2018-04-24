@@ -36,6 +36,24 @@ colorEcho(){
     cyan)
         currentColor='\033[0;36m'         # Cyan
         ;;
+    lred)
+        currentColor='\033[1;31m'          # Red
+        ;;
+    lgreen)
+        currentColor='\033[1;32m'        # Green
+        ;;
+    lyellow)
+        currentColor='\033[1;33m'       # Yellow
+        ;;
+    lblue)
+        currentColor='\033[1;34m'         # Blue
+        ;;
+    lpurple)
+        currentColor='\033[1;35m'       # Purple
+        ;;
+    lcyan)
+        currentColor='\033[1;36m'         # Cyan
+        ;;
     white)
         currentColor='\033[0;37m'        # White
         ;;

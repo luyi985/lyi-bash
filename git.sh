@@ -98,6 +98,7 @@ getLatestCode(){
     
     git rebase master
     [[ $? -eq 0 ]] && {
+        colorEcho lyellow "$(git log -1)"
         success "SUCCESS: ${1} got the latest code"
     }
 
