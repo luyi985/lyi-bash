@@ -7,7 +7,7 @@ export currentSiteAuto="$HOME/Desktop/site/${currentSite}/automation"
 
 export foodSiteSrc="$HOME/Desktop/site/${currentSite}"
 
-alias run="cd ${currentSiteSrc} && APP_KEY=${appKey} APP_REGION=au APP_ENV=dev APP_DEBUG=true APP_STUBBED=false npm run dev"
+alias run="cd ${currentSiteSrc} && APP_KEY=${appKey} APP_REGION=au APP_ENV=production APP_DEBUG=true APP_STUBBED=false npm run dev"
 alias run-auto="cd ${currentSiteSrc} && APP_KEY=${appKey} APP_ENV=sit APP_DEBUG=true APP_STUBBED=true npm run dev"
 alias auto="export URL=http://localhost:3001/ && export HTTP_PROXY='' && export HTTPS_PROXY=${MY_PROXY} && export APP_KEY=${appKey} && cd ${currentSiteAuto} && rf && npm run watch"
 alias autop="export URL=http://localhost:3001/ && export HTTP_PROXY='' && export HTTPS_PROXY=${MY_PROXY} && export APP_KEY=${appKey}&& cd ${currentSiteAuto} && npm run watch:phantom"
