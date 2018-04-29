@@ -6,6 +6,7 @@
   - if aws cli is not installed, automatically install it
   - open terminal, travel to the folder where contains accessKeys.csv, run command `setAws`
 thats all!!!!!
+(https://docs.aws.amazon.com/cli/latest/userguide/awscli-install-bundle.html#install-bundle-user)
 
 **Before use:**
 Please make sure python3 and pip installed
