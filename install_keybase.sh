@@ -1,4 +1,5 @@
 #https://keybase.io/docs/the_app/install_linux
+curl --version || sudo apt-get install curl
 
 keybase --version || {
 	curl -O https://prerelease.keybase.io/keybase_amd64.deb
