@@ -2,8 +2,8 @@ export site="now"
 export appKey="now-site"
 
 export currentSite="${site}-site"
-export currentSiteSrc="$HOME/Desktop/site/${currentSite}/src"
-export currentSiteAuto="$HOME/Desktop/site/${currentSite}/automation"
+export currentSiteSrc="$HOME/git/${currentSite}/src"
+export currentSiteAuto="$HOME/git/${currentSite}/automation"
 
 export foodSiteSrc="$HOME/Desktop/site/${currentSite}"
 
@@ -52,7 +52,8 @@ packageInstallInBatch(){
         addProjectFolders;
     }
     [[ -z ${SITE_ARR} ]] || {
-        for site in "${SITE_ARR[@]}"
+        local sites=( $(echo ${SITE_ARR}) )
+        for site in "${sites[@]}"
         do
             packageInstaller $1 "${site}/src"
         done
