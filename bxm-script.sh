@@ -60,6 +60,38 @@ packageInstallInBatch(){
     }
 }
 
+packageReinstall() {
+    infoOutput "Reinstall package at ${1}"
+    local status
+    [[ -d "${1}" && -d "${1}/src" ]] && {
+        cd ${1}/src
+        [ -f "package.json" ] || status=1;
+        [ -f "package.json" ] && {
+            [ -f "package-lock.json" ] && rm "package-lock.json";
+            [ -d "node_modules" ] && rm -rf node_modules;
+            npm install && success "Reinstalled ${1}"''
+            status=$?;
+        }
+        return $status
+    }
+}
+
+packageReinstallInBatch() {
+    [[ -z ${SITE_ARR} ]] && {
+        errorAlert "SITE_ARR is null";
+        addProjectFolders;
+    }
+
+    [[ -z ${SITE_ARR} ]] || {
+        local sites=( $(echo ${SITE_ARR}) )
+        for site in "${sites[@]}"
+        do
+            packageReinstall "${site}"
+        done
+    }
+}
+
+
 # -----------Git update code------------
 gitUpdateInBatch(){
     [[ -z ${SITE_ARR} ]] && {
@@ -81,3 +113,5 @@ gitUpdateInBatch(){
 
 alias ib=packageInstallInBatch
 alias gpull=gitUpdateInBatch
+alias ri=packageReinstall
+alias bri=packageReinstallInBatch
