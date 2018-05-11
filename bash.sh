@@ -9,6 +9,7 @@ if [[ -n $LYI_BASH ]]; then
     source "${LYI_BASH}/git.sh"
     source "${LYI_BASH}/bxm-script.sh"
     source "${LYI_BASH}/docker.sh"
+    source "${LYI_BASH}/bxm-aws.sh"
     infoOutput "\$LYI_BASH : $LYI_BASH"
 fi
 

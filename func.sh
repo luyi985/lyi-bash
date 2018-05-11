@@ -104,6 +104,22 @@ GET_BASH_PATH() {
     return 1
 }
 
+
+UPDATE_VAR_IN_FILE() {
+    local file=$1
+    local varName=$2
+    local varVal=$3
+    local lookingforVar
+
+    [[ -f $file ]] || return 1
+
+    lookingforVar=$( cat $file | grep "export ${varName}=")
+   
+    [[ -z $lookingforVar ]] && echo "export ${varName}=\"${varVal}\"" >> $1
+    [[ -z $lookingforVar ]] || sed -i -e "/export ${varName}=/ s|=.*|=\"${varVal}\"|g" $1
+    return $?
+}
+
 UPDATE_BASH(){
     [[ -f "${HOME}/.bashrc" ]] && source "${HOME}/.bashrc"
     [[ -f "${HOME}/.bash_profile" ]] && source "${HOME}/.bash_profile"
@@ -112,3 +128,4 @@ UPDATE_BASH(){
     return $ret_code
 }
 alias rb=UPDATE_BASH
+alias uf=UPDATE_VAR_IN_FILE
