@@ -1,5 +1,6 @@
 # lyi-bash
 * Install: git clone https://github.com/luyi985/lyi-bash.git ./bash && cd bash && bash install.sh
+* Install: git clone git@github.com:luyi985/lyi-bash.git ./bash && cd bash && bash install.sh
 
 ## AWS
 * CLI SETUP:
