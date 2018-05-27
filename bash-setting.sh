@@ -98,4 +98,4 @@ setOptions() {
 }
 
 alias setup=setOptions
-
+alias fg=fastGo
