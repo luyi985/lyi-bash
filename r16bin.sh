@@ -1,15 +1,22 @@
 #!/bin/sh
 
 PACKPATH=(
-	"/home/bxmdev/git/flux/src"
+	"/home/bxmdev/git/markdown/src"
 )
+
 OPS=(
+	"/react-codemod/transforms/React-DOM-to-react-dom-factories.js"
+	"/react-codemod/transforms/create-element-to-jsx.js"
+	"/react-codemod/transforms/error-boundaries.js"
+	"/react-codemod/transforms/manual-bind-to-arrow.js"
+	"/react-codemod/transforms/pure-component.js"
+	"/react-codemod/transforms/rename-unsafe-lifecycles.js"
+	"/react-codemod/transforms/sort-comp.js"
 	"/react-codemod/transforms/React-PropTypes-to-prop-types.js"
 	"/react-codemod/transforms/class.js --mixin-module-name=react-addons-pure-render-mixin --flow=true --pure-component=true --remove-runtime-proptypes=false"
 	"/react-codemod/transforms/findDOMNode.js"
 	"/react-codemod/transforms/react-to-react-dom.js"
 )
-
 
 install_r16() {
 	local currentfolder="$(pwd)"
@@ -45,7 +52,9 @@ upgrade() {
 
 	for op in "${OPS[@]}"
 	do
+		echo "_________________________________________________________________________________________________________________________________"
 		echo "Start: ${op} ---> ${pack}"
+		echo "_________________________________________________________________________________________________________________________________"
 		jscodeshift -t "${currentfolder}${op}" ${pack}
 	done
 }

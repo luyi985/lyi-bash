@@ -19,3 +19,4 @@ fi
 
 alias installAws="bash ${LYI_BASH}/install_aws.sh"
 alias installKeybase="bash ${LYI_BASH}/install_keybase.sh"
+alias r16="bash ${LYI_BASH}/r16bin.sh"
