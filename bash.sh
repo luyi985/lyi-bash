@@ -16,6 +16,7 @@ fi
 [[ -z $WORK_PLACE ]] || cd $WORK_PLACE
 [[ -z $WORK_PLACE ]] || infoOutput "\$WORK_PLACE: ${WORK_PLACE}"
 [[ -z $SITE_ARR ]] || infoOutput "\$SITE_ARR: ${SITE_ARR}"
+[[ -f ${HOME}/.ssh/github/id_rsa ]] && ssh-add ${HOME}/.ssh/github/id_rsa
 
 alias installAws="bash ${LYI_BASH}/install_aws.sh"
 alias installKeybase="bash ${LYI_BASH}/install_keybase.sh"
