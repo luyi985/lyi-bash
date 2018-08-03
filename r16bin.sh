@@ -1,7 +1,8 @@
 #!/bin/sh
 
 PACKPATH=(
-	"/home/bxmdev/git/markdown/src"
+	"/home/bxmdev/git/homes-site/src/app"
+	"/home/bxmdev/git/homes-site/src/test"
 )
 
 OPS=(
@@ -55,7 +56,7 @@ upgrade() {
 		echo "_________________________________________________________________________________________________________________________________"
 		echo "Start: ${op} ---> ${pack}"
 		echo "_________________________________________________________________________________________________________________________________"
-		jscodeshift -t "${currentfolder}${op}" ${pack}
+		jscodeshift -t "${currentfolder}${op}" ${pack}/{**/**/*,**/*,*}.{js,jsx} --parser=babylon
 	done
 }
 
