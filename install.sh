@@ -16,3 +16,5 @@ else
     echo "source $script_dir/main.sh" >> ~/.bashrc
 fi
 
+# bash $script_dir/install_nvm.sh
+# bash $script_dir/install_ollama.sh
