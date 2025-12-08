@@ -9,3 +9,4 @@ nvidia-smi
 source $script_dir/base.sh
 source $script_dir/conda.sh
 source $script_dir/nvm.sh
+source $script_dir/alias.sh
