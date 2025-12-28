@@ -1,0 +1,3 @@
+alias digital-ocean="ssh root@138.197.9.69"
+alias spider-build="docker build --cache-from --force-rm -t spider ."
+alias spider-run="docker run --rm -d -p 80:8080 --name spider-con spider"
