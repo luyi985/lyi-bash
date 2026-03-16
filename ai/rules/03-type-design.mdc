@@ -1,0 +1,16 @@
+---
+description: Design precise, maintainable types with minimal unsoundness
+globs:
+  - "**/*.{ts,tsx}"
+alwaysApply: true
+---
+
+# Type design
+
+- Model domain states precisely; prefer tagged unions over boolean flags and loosely related optional fields.
+- Prefer specific string literals and unions over broad `string` when the valid set is known.
+- Prefer `unknown` over `any` at unsafe boundaries.
+- Avoid wrapper object types like `String`, `Number`, and `Boolean`; use primitives.
+- Avoid wide index signatures when `Record`, mapped types, or explicit properties are sufficient.
+- Keep public types consistent and intentional; avoid duplicate shapes with slightly different meanings.
+- Introduce generics only when they express a real relationship between inputs and outputs.

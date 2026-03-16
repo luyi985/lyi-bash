@@ -1,0 +1,16 @@
+---
+description: Use narrowing and explicit guards instead of unsafe assertions
+globs:
+  - "**/*.{ts,tsx}"
+alwaysApply: true
+---
+
+# Type narrowing and safety
+
+- Never use a type assertion when control-flow narrowing can solve the problem.
+- Narrow values with `if`, `switch`, early `return`, early `throw`, `typeof`, `instanceof`, `in`, and `Array.isArray`.
+- Use discriminated unions for stateful data and branch on the discriminant.
+- Prefer user-defined type guards when built-in narrowing is not enough.
+- Avoid `as` in conditionals and branch bodies unless there is no sound alternative.
+- When handling nullable values, narrow first instead of asserting non-null.
+- Make switches over tagged unions exhaustive.

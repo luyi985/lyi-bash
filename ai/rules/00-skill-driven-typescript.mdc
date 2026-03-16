@@ -1,0 +1,16 @@
+---
+description: Base TypeScript and JavaScript rules for this repository
+globs:
+  - "**/*.{ts,tsx,js,jsx,mjs,cjs}"
+alwaysApply: true
+---
+
+# Skill-driven TypeScript rules
+
+- Use the rules in `rules/*.mdc` as the default standard for TypeScript and JavaScript changes.
+- For topic-specific guidance, use `../skills/**/SKILL.md` directly as the single source of truth.
+- Treat [rules/06-skills-source-index.mdc](rules/06-skills-source-index.mdc) as the complete map of available skill documents.
+- Prefer simple, readable, modern JavaScript over clever or legacy patterns.
+- Optimize for correctness first, then readability, then minimal complexity.
+- Keep changes small and local; avoid introducing abstractions without a clear benefit.
+- For type-related changes, prefer narrowing, precise modeling, and accurate environment typing over `any` and broad assertions.

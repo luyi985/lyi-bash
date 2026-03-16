@@ -1,0 +1,15 @@
+---
+description: Balance inference and annotations for clarity and maintainability
+globs:
+  - "**/*.{ts,tsx}"
+alwaysApply: true
+---
+
+# Inference and annotations
+
+- Prefer type inference for local variables when the inferred type is clear.
+- Add explicit annotations for exported APIs, complex return types, and places where inference becomes ambiguous.
+- Do not add annotations that only repeat the obvious initializer type.
+- Prefer function signatures that are easy to read over highly abstract generic signatures.
+- Avoid unnecessary type parameters and overloaded signatures when simpler alternatives work.
+- Keep nullability at the edges when possible; avoid spreading `null | undefined` through the whole codebase.
