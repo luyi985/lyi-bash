@@ -1,7 +1,7 @@
 #!/bin/bash
 source $(dirname "$0")/settings.sh
 
-activeCloudflared() {
+activateCloudclared() {
   if ! pgrep -x "cloudflared" > /dev/null
   then
     echo "cloudflared is not running, starting it..."

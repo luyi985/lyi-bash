@@ -1,7 +1,7 @@
 #!/bin/bash
 source $(dirname "$0")/settings.sh
 
-activeCloudflared() {
+activateCloudclared() {
     # Add cloudflare gpg key
     sudo mkdir -p --mode=0755 /usr/share/keyrings
     curl -fsSL https://pkg.cloudflare.com/cloudflare-public-v2.gpg | sudo tee /usr/share/keyrings/cloudflare-public-v2.gpg >/dev/null
