@@ -17,7 +17,13 @@ set +a
 
 function rb() {
     current_cmd_dir=$(pwd)
-    source ~/.bashrc 2>&1
+    if [ -f ~/.bashrc ]; then
+    echo "~/.bashrc found."
+    source ~/.bashrc
+    elif [ -f ~/.zshrc ]; then
+    echo "~/.zshrc found."
+    source ~/.zshrc
+    fi
     cd $current_cmd_dir
 }
 
