@@ -1,12 +1,14 @@
 #!/bin/bash
-source $(dirname "$0")/settings.sh
+script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+
+source "$script_dir/settings.sh"
 
 case "$system" in
 	mac)
-		source $(dirname "$0")/mac.sh
+		source "$script_dir/mac.sh"
 		;;
 	ubuntu)
-		source $(dirname "$0")/ubuntu.sh
+		source "$script_dir/ubuntu.sh"
 		;;
 	*)
 		echo "Unsupported system: $system. Expected 'mac' or 'ubuntu'."

@@ -1,5 +1,7 @@
 #!/bin/bash
-source $(dirname "$0")/settings.sh
+script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+
+source "$script_dir/settings.sh"
 
 activateCloudclared() {
     # Add cloudflare gpg key
