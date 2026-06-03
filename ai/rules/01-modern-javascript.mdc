@@ -7,9 +7,7 @@ alwaysApply: true
 
 # Write modern JavaScript
 
-- Prefer `const` over `let`, and `let` over `var`.
-- Prefer `async`/`await` over Promise chains.
-- Prefer object/array spread over `Object.assign` and manual copying.
-- Prefer destructuring, optional chaining, and nullish coalescing where they improve clarity.
-- Prefer standard JavaScript features over TypeScript-only patterns that compile to verbose output.
-- Do not manually write legacy code for old runtimes; write modern code and rely on the toolchain to downlevel if needed.
+- Prefer `const` over `let`, and avoid `var`.
+- Prefer `async`/`await` over callbacks and long Promise chains.
+- Use clear modern syntax: spread, destructuring, optional chaining, nullish coalescing.
+- Write for modern runtimes; let toolchains handle compatibility when needed.

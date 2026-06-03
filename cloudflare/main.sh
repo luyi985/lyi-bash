@@ -1,14 +1,20 @@
 #!/bin/bash
-script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+if [ -n "$BASH_SOURCE" ]; then
+	cloudflare_script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+elif [ -n "$ZSH_VERSION" ]; then
+	cloudflare_script_dir=$(cd -- "$(dirname -- "${(%):-%x}")" &> /dev/null && pwd)
+else
+	cloudflare_script_dir=$(cd -- "$(dirname -- "$0")" &> /dev/null && pwd)
+fi
 
-source "$script_dir/settings.sh"
+source "$cloudflare_script_dir/settings.sh"
 
 case "$system" in
 	mac)
-		source "$script_dir/mac.sh"
+		source "$cloudflare_script_dir/mac.sh"
 		;;
 	ubuntu)
-		source "$script_dir/ubuntu.sh"
+		source "$cloudflare_script_dir/ubuntu.sh"
 		;;
 	*)
 		echo "Unsupported system: $system. Expected 'mac' or 'ubuntu'."
