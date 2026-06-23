@@ -24,9 +24,14 @@ function setup_pyenv_env() {
 		export PATH="$PYENV_ROOT/bin:$PATH"
 	fi
 
-	if command -v pyenv >/dev/null 2>&1; then
-		eval "$(pyenv init - zsh)"
-	fi
+	# Lazy-load pyenv: only run 'pyenv init' when python/pip/python3 are first used
+	pyenv() {
+		unset -f pyenv
+		if command -v pyenv >/dev/null 2>&1; then
+			eval "$(pyenv init - zsh)"
+		fi
+		pyenv "$@"
+	}
 }
 
 install_pyenv_if_needed

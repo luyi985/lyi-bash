@@ -12,6 +12,7 @@ fi
 
 # nvidia-smi
 # Source base.sh which exports script_dir and loads .env
+source $script_dir/exportEnv.sh
 source $script_dir/base.sh
 source $script_dir/conda.sh
 source $script_dir/python.sh
