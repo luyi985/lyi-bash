@@ -9,7 +9,9 @@ services:
     environment:
       POSTGRES_INITDB_ARGS: "-c max_connections=200"
     volumes:
-      - postgresql_data:/var/lib/postgresql/data
+      # PostgreSQL 18+ expects data at /var/lib/postgresql (with version subdirectories)
+      # instead of /var/lib/postgresql/data for pg_upgrade compatibility
+      - postgresql_data:/var/lib/postgresql
     ports:
       - "5432:5432"
     restart: unless-stopped
