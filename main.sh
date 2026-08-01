@@ -20,3 +20,4 @@ source $script_dir/nvm.sh
 source $script_dir/alias.sh
 source $script_dir/ubuntu_snapper.sh
 source $script_dir/cloudflare/main.sh
+source $script_dir/stack/bin.sh
