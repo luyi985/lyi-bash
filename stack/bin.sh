@@ -2,7 +2,6 @@
 
 # Docker stack management functions
 
-# Resolve the directory where this script lives (bash + zsh compatible)
 _stack_dir() {
     if [ -n "$BASH_SOURCE" ]; then
         echo "$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
@@ -15,18 +14,18 @@ _stack_dir() {
 
 stackUp() {
     echo "Starting Docker stack..."
-    local compose_file="$(_stack_dir)/docker-compose.yml"
-    docker compose -f "$compose_file" up -d && echo "Stack is up!" || { echo "Error: Failed to start stack. Make sure Docker is running."; return 1; }
+    local stack_dir="$(_stack_dir)"
+    podman compose -f "$stack_dir/docker-compose.yml" up -d && echo "Stack is up!" || { echo "Error: Failed to start stack. Make sure Docker is running."; return 1; }
 }
 
 stackDown() {
     echo "Stopping Docker stack..."
-    local compose_file="$(_stack_dir)/docker-compose.yml"
-    docker compose -f "$compose_file" down && echo "Stack is down!" || { echo "Error: Failed to stop stack."; return 1; }
+    local stack_dir="$(_stack_dir)"
+    podman compose -f "$stack_dir/docker-compose.yml" down && echo "Stack is down!" || { echo "Error: Failed to stop stack."; return 1; }
 }
 
 stackReload() {
-    echo "Stopping Docker stack..."
-    local compose_file="$(_stack_dir)/docker-compose.yml"
-    docker compose -f "$compose_file" restart && echo "Stack is reloaded!" || { echo "Error: Failed to reload stack."; return 1; }
+    echo "Reloading Docker stack..."
+    local stack_dir="$(_stack_dir)"
+    podman compose -f "$stack_dir/docker-compose.yml" restart && echo "Stack is reloaded!" || { echo "Error: Failed to reload stack."; return 1; }
 }

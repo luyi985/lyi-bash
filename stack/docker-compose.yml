@@ -2,23 +2,86 @@ services:
   postgresql:
     image: postgres:latest
     container_name: postgresql_db
+
     env_file:
       - ./env
+
     environment:
-      POSTGRES_INITDB_ARGS: "-c max_connections=200"
+      POSTGRES_INITDB_ARGS: "${POSTGRES_INITDB_ARGS}"
+
     volumes:
-      # PostgreSQL 18+ expects data at /var/lib/postgresql (with version subdirectories)
-      # instead of /var/lib/postgresql/data for pg_upgrade compatibility
       - postgresql_data:/var/lib/postgresql
+
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
+
     restart: unless-stopped
+
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"
+        ]
       interval: 10s
       timeout: 5s
       retries: 5
 
+  flowise:
+    image: flowiseai/flowise:latest
+    container_name: flowise
+    restart: unless-stopped
+
+    env_file:
+      - ./env
+      - ./.env
+
+    depends_on:
+      postgresql:
+        condition: service_healthy
+
+    ports:
+      - "127.0.0.1:${FLOWISE_PORT:-3000}:3000"
+
+    environment:
+      PORT: 3000
+
+      # Flowise 主数据库
+      DATABASE_TYPE: postgres
+      DATABASE_HOST: postgresql
+      DATABASE_PORT: 5432
+      DATABASE_NAME: "${POSTGRES_DB}"
+      DATABASE_USER: "${POSTGRES_USER}"
+      DATABASE_PASSWORD: "${POSTGRES_PASSWORD}"
+      DATABASE_SSL: "false"
+
+      # 文件与 Credential 加密密钥
+      STORAGE_TYPE: local
+      BLOB_STORAGE_PATH: /home/node/.flowise/storage
+      LOG_PATH: /home/node/.flowise/logs
+      SECRETKEY_STORAGE_TYPE: local
+      SECRETKEY_PATH: /home/node/.flowise
+
+      DISABLE_FLOWISE_TELEMETRY: "true"
+      LOG_LEVEL: info
+
+    volumes:
+      - flowise_data:/home/node/.flowise
+
+    mem_limit: 1g
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/v1/ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+    entrypoint: /bin/sh -c "sleep 3; flowise start"
+
 volumes:
   postgresql_data:
+    driver: local
+
+  flowise_data:
     driver: local
