@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Setup PATH if directory exists and not already in PATH
+setup_path_if_needed() {
+	local dir="$1"
+	if [ -d "$dir" ] && [[ ":$PATH:" != *":$dir:"* ]]; then
+		export PATH="$dir:$PATH"
+	fi
+}
+
 function install_pyenv_if_needed() {
 	if [ -d "$HOME/.pyenv" ] || command -v pyenv >/dev/null 2>&1; then
 		return 0
@@ -20,9 +28,7 @@ function setup_pyenv_env() {
 	fi
 
 	export PYENV_ROOT="$HOME/.pyenv"
-	if [[ -d $PYENV_ROOT/bin ]] && [[ ":$PATH:" != *":$PYENV_ROOT/bin:"* ]]; then
-		export PATH="$PYENV_ROOT/bin:$PATH"
-	fi
+	setup_path_if_needed "$PYENV_ROOT/bin"
 
 	# Lazy-load pyenv: only run 'pyenv init' when python/pip/python3 are first used
 	pyenv() {
@@ -36,3 +42,20 @@ function setup_pyenv_env() {
 
 install_pyenv_if_needed
 setup_pyenv_env
+
+# Ensure ~/.local/bin is in PATH (uv and other tools install there)
+setup_path_if_needed "$HOME/.local/bin"
+
+function install_uv_if_needed() {
+	if command -v uv >/dev/null 2>&1; then
+		return 0
+	fi
+
+	echo "uv not found. Installing uv..."
+	curl -LsSf https://astral.sh/uv/install.sh | sh
+
+	# Source uv into current shell session
+	setup_path_if_needed "$HOME/.local/bin"
+}
+
+install_uv_if_needed
