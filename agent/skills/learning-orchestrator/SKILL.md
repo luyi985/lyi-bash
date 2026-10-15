@@ -1,6 +1,6 @@
 ---
 name: learning-orchestrator
-description: Prepare or resume a file-backed learning workspace from local source material or external links, validate inputs, decompose the material into knowledge points, and track KP progress. Use for planning and maintaining a structured learning path; do not use it to teach an individual KP.
+description: Prepare or resume a file-backed learning workspace from local files, repositories, or external links. Preview structure, validate sources, plan knowledge points, and report progress. Use for learning-path preparation and maintenance, not individual KP teaching or a standalone code audit.
 ---
 
 # Learning Orchestrator
@@ -10,38 +10,35 @@ Turn validated learning material into a resumable set of KP Markdown files. This
 ## Boundaries
 
 - Own workspace inspection, initialization, recovery, source validation, analysis, KP decomposition, KP persistence, and progress reporting.
-- Do not teach, quiz, or write the learned content of an individual KP.
+- Produce source-grounded learning definitions and brief previews, not full lessons, quizzes, user understanding, or learned notes.
 - Do not invoke, require, or define another skill.
 - Treat files as persistent state. Do not rely on conversation history as the source of truth.
 
-## Required references
+## Workflow and references
 
-Before changing a learning workspace, read:
+Follow [references/common-workflow.md](references/common-workflow.md): structure preview, workspace recovery, source validation, analysis and planning, then persistence and reporting. Load other references for the operation being performed:
 
-1. [references/folder-structure.md](references/folder-structure.md) for directory meanings and creation rules.
-2. [references/learning-source.md](references/learning-source.md) for input resolution and the validation gate.
-3. [references/kp-specification.md](references/kp-specification.md) before creating or updating KP files.
-4. [references/common-workflow.md](references/common-workflow.md) for the lifecycle and resume behavior.
+- [references/kp-specification.md](references/kp-specification.md) for interpreting KP metadata and before creating or updating KPs. It owns the schema, quality requirements, dependency checks, and next-item selection rules.
+- [references/folder-structure.md](references/folder-structure.md) before initializing directories or resolving write destinations.
+- [references/learning-source.md](references/learning-source.md) before validating sources or writing source locators. It owns access and relative-path rules. A progress-only request does not require source validation or initialization guidance.
 
 ## Inputs
 
-Accept one or both of:
+For analysis, accept one or both of:
 
-- a specified file or folder under the workspace's `preRaw/` tree;
+- a specified local file, folder, or repository, including locations outside the learning workspace;
 - an external link or externally addressable resource.
 
-Also resolve the target learning root. If more than one plausible root exists and it cannot be inferred safely, ask before writing.
+For progress reporting, an existing learning root is sufficient; no new source is required. Resolve the learning root separately from source locations. If more than one plausible root exists and it cannot be inferred safely, ask before writing.
 
-## Operating rules
+## Core rules
 
-1. Inspect before creating. Preserve a valid workspace and reconstruct progress from KP files.
-2. Create only missing required directories; do not reorganize user material without explicit approval.
-3. Validate every requested input before analysis. If available material is incomplete relative to the requested scope, stop and report what is unavailable.
-4. Do not generate or revise the KP plan until the validation gate passes.
-5. Use a supplied learning mode only for decomposition depth, ordering, and practice emphasis. Otherwise preserve the source's structure and produce independently learnable KPs. Each KP must cover one complete knowledge point rather than grouping loosely related topics.
-6. Save each KP as `preRaw/KP/{kp-id}.md` using the shared schema and quality rules. Use simple language, pair technical terms with their English names when writing in another language, maintain a coherent reasoning sequence, attach traceable sources, and include at least one explanatory example. Preserve existing IDs and user-authored content whenever possible.
-7. Derive progress by scanning KP metadata. Do not create a second progress source of truth.
-8. Report validation, KP changes, status counts, and the next eligible KP. Stop there.
+- Inspect before creating; preserve workspace structure, KP identity, status, and user-authored content. Querying progress is read-only.
+- Treat local sources as read-only references. Do not copy, move, or modify them automatically.
+- Local learning works without Google Drive or any remote connector. Use connectors only for corresponding user-specified remote sources; retain their real URLs or resource identifiers. Persist local source paths relatively according to `learning-source.md`, never as absolute paths.
+- Structure preview may precede validation. Detailed content or code analysis and KP planning require the source validation gate to pass.
+- Use a supplied learning mode only for decomposition depth, ordering, and practice emphasis. Otherwise preserve source structure where compatible with independently learnable KPs. Module-level implementation and data-flow analysis are not a required workflow in this version.
+- Derive progress from KP metadata, not a second progress table. Report existing progress even when a source becomes unavailable; do not replan from incomplete inputs.
 
 ## Safety and user control
 
