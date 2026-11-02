@@ -18,10 +18,11 @@ Install agent/AGENTS.md, standards, and optional SDD workflow into
   Claude Code:  ~/.claude/CLAUDE.md
   Copilot CLI:  ~/.copilot/copilot-instructions.md
   Gemini CLI:   ~/.gemini/GEMINI.md
+  Cursor:       ~/.cursor/rules/shared-agent-instructions.mdc
 
 Files already present and different are left untouched unless --force is used.
 --force backs up each replaced file as <file>.bak (only if no .bak exists).
-Cursor User Rules and Copilot IDE-specific settings must be configured manually.
+Copilot IDE-specific settings must be configured manually.
 HELP
 }
 
@@ -80,4 +81,13 @@ sync_file "$SOURCE/AGENTS.md" "$HOME/.codex/AGENTS.md"
 sync_file "$SOURCE/AGENTS.md" "$HOME/.claude/CLAUDE.md"
 sync_file "$SOURCE/AGENTS.md" "$HOME/.copilot/copilot-instructions.md"
 sync_file "$SOURCE/AGENTS.md" "$HOME/.gemini/GEMINI.md"
-printf '\nNote: Cursor User Rules and Copilot IDE adapters need manual configuration.\n'
+
+# Cursor uses MDC frontmatter to apply the shared instructions to every chat.
+CURSOR_RULE="$(mktemp "${TMPDIR:-/tmp}/sync-agent-config.XXXXXX")"
+trap 'rm -f "$CURSOR_RULE"' EXIT
+{
+  printf '%s\n' '---' 'alwaysApply: true' '---' ''
+  cat "$SOURCE/AGENTS.md"
+} > "$CURSOR_RULE"
+sync_file "$CURSOR_RULE" "$HOME/.cursor/rules/shared-agent-instructions.mdc"
+printf '\nNote: Copilot IDE adapters need manual configuration.\n'

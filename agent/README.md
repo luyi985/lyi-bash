@@ -19,8 +19,10 @@ bash agent/sync-agent-config.sh
 
 If an existing target differs, the script skips it to avoid overwriting user configuration. Inspect the changes, then use `--force` to replace with a `.bak` backup (the script will refuse to overwrite an existing backup). The script never runs `git pull` automatically.
 
-Supported adapters: Codex (`~/.codex/AGENTS.md`), Claude Code (`~/.claude/CLAUDE.md`), Copilot CLI (`~/.copilot/copilot-instructions.md`), Gemini CLI (`~/.gemini/GEMINI.md`). Canonical copies live under `~/.agents/`.
+Supported adapters: Codex (`~/.codex/AGENTS.md`), Claude Code (`~/.claude/CLAUDE.md`), Copilot CLI (`~/.copilot/copilot-instructions.md`), Gemini CLI (`~/.gemini/GEMINI.md`), Cursor (`~/.cursor/rules/shared-agent-instructions.mdc`). Canonical copies live under `~/.agents/`.
 
-Cursor global User Rules and Copilot IDE instructions are client-specific and must be configured separately. Support and loading behaviour may vary by client/version. Restart or reopen the agent to verify that instructions are read.
+Cursor receives a full copy of `AGENTS.md` with `alwaysApply: true` MDC frontmatter. The file is a local user rule under `~/.cursor/rules`, as documented in [Cursor's rules storage guide](https://cursor.com/help/customization/rules#where-are-rules-stored); it does not sync through your Cursor account. On older clients that do not load this directory, paste `~/.agents/AGENTS.md` into Cursor's User Rules settings.
+
+Copilot IDE instructions must be configured separately. Support and loading behaviour may vary by client/version. Restart or reopen the agent to verify that instructions are read.
 
 This setup does not provide hard enforcement of review gates; it provides instructions and a default collaboration policy.
